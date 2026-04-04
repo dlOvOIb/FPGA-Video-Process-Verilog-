@@ -86,7 +86,7 @@ FPGA代码综合、布线到上板通常需要十几分钟，而且查BUG也很�
         output  wire        de_o,
         output  wire [7:0] data_o
     );
-![RGB转灰度结果图](Sim_result\RGB2Gray.bmp)
+![RGB转灰度结果图](Sim_result\RGB2Gray.png)
 ### 2.2 形态学处理
 
 ### 2.3 滤波器

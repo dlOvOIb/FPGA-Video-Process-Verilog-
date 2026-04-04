@@ -108,7 +108,7 @@ $$Y = \frac{R \times 77 + G \times 150 + B \times 29}{256}$$
 #### 2.1.2 灰度转二值图
 将8位灰度视频数据转为1位二值数据
 
-module RGB_to_Binary(
+module Gray_to_Binary(
         input  wire         clk,
         input  wire         rst_n,
 

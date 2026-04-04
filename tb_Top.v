@@ -61,7 +61,7 @@ module tb_Top();
     wire        binary_de;
     wire        binary_data;
 
-    RGB_to_Binary RGB_to_Binary(
+    Gray_to_Binary Gray_to_Binary(
         .clk(clk),
         .rst_n(rst_n),
         .threshold(8'd127),

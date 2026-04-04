@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module RGB_to_Binary(
+module Gray_to_Binary(
         input  wire         clk,
         input  wire         rst_n,
 

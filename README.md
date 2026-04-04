@@ -69,7 +69,24 @@ FPGA代码综合、布线到上板通常需要十几分钟，而且查BUG也很�
 ## 2 线性图像处理模块
 
 ### 2.1 颜色处理
+#### 2.1.1 RGB转灰度
+将24位RGB视频数据转为8位灰度数据
 
+    module RGB_to_Gray(
+        input  wire        clk,
+        input  wire        rst_n,
+
+        input  wire        vs_i,
+        input  wire        hs_i,
+        input  wire        de_i,
+        input  wire [23:0] data_i, 
+
+        output  wire        vs_o,
+        output  wire        hs_o,
+        output  wire        de_o,
+        output  wire [7:0] data_o
+    );
+![RGB转灰度结果图](Sim_result\RGB2Gray.bmp)
 ### 2.2 形态学处理
 
 ### 2.3 滤波器

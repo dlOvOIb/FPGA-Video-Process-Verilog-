@@ -1,38 +1,18 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 2026/04/04 13:44:33
-// Design Name: 
-// Module Name: RGB_to_Gray
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
 
 module RGB_to_Gray(
-        input  wire        clk,
-        input  wire        rst_n,
+        input  wire         clk,
+        input  wire         rst_n,
 
-        input  wire        vs_i,
-        input  wire        hs_i,
-        input  wire        de_i,
-        input  wire [23:0] data_i, 
+        input  wire         vs_i,
+        input  wire         hs_i,
+        input  wire         de_i,
+        input  wire [23:0]  data_i, 
 
         output  wire        vs_o,
         output  wire        hs_o,
         output  wire        de_o,
-        output  wire [7:0] data_o
+        output  wire [7:0]  data_o
     );
 
     wire [7:0] r = data_i[23:16];

@@ -36,6 +36,26 @@ module tb_Top();
         .data_o(in_data)
     );
 
+    wire        gray_vs;
+    wire        gray_hs;
+    wire        gray_de;
+    wire [7:0]  gray_data;
+
+    RGB_to_Gray RGB_to_Gray(
+        .clk(clk),
+        .rst_n(rst_n),
+
+        .vs_i(in_vs),
+        .hs_i(in_hs),
+        .de_i(in_de),
+        .data_i(in_data), 
+
+        .vs_o(gray_vs),
+        .hs_o(gray_hs),
+        .de_o(gray_de),
+        .data_o(gray_data)
+    );
+
 
 
     // 例化输出模块 (sim_video_out)
@@ -48,10 +68,10 @@ module tb_Top();
     ) u_sim_video_out (
         .clk        (clk),
         .rst_n      (rst_n),
-        .vs_i       (in_vs),
-        .hs_i       (in_hs),     
-        .de_i       (in_de),
-        .data_i     (in_data),
+        .vs_i       (gray_vs),
+        .hs_i       (gray_hs),     
+        .de_i       (gray_de),
+        .data_i     ({gray_data,gray_data,gray_data}),
         .frame_done (out_frame_done) // 连出完成信号
     );
 

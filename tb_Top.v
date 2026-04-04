@@ -56,6 +56,27 @@ module tb_Top();
         .data_o(gray_data)
     );
 
+    wire        binary_vs;
+    wire        binary_hs;
+    wire        binary_de;
+    wire        binary_data;
+
+    RGB_to_Binary RGB_to_Binary(
+        .clk(clk),
+        .rst_n(rst_n),
+        .threshold(8'd127),
+        .vs_i(gray_vs),
+        .hs_i(gray_hs),
+        .de_i(gray_de),
+        .data_i(gray_data), 
+
+        .vs_o(binary_vs),
+        .hs_o(binary_hs),
+        .de_o(binary_de),
+        .data_o(binary_data)
+    );
+
+    
 
 
     // 例化输出模块 (sim_video_out)
@@ -64,14 +85,14 @@ module tb_Top();
     sim_video_out #(
         .IMG_W(IMG_W), 
         .IMG_H(IMG_H),
-        .FILE_PATH("D:/FPGA/0Video_process/FPGA-Video-Process-Verilog-/output.bmp")
+        .FILE_PATH("D:/FPGA/0Video_process/FPGA-Video-Process-Verilog-/Sim_result/output.bmp")
     ) u_sim_video_out (
         .clk        (clk),
         .rst_n      (rst_n),
-        .vs_i       (gray_vs),
-        .hs_i       (gray_hs),     
-        .de_i       (gray_de),
-        .data_i     ({gray_data,gray_data,gray_data}),
+        .vs_i       (binary_vs),
+        .hs_i       (binary_hs),     
+        .de_i       (binary_de),
+        .data_i     ({binary_data*24'hFFFFFF}),
         .frame_done (out_frame_done) // 连出完成信号
     );
 

@@ -72,6 +72,23 @@ FPGA代码综合、布线到上板通常需要十几分钟，而且查BUG也很�
 #### 2.1.1 RGB转灰度
 将24位RGB视频数据转为8位灰度数据
 
+该模块采用的方法为将 RGB 转换为 YCbCr 色彩空间中的 Y 分量，标准浮点数公式是
+$$Y = 0.299 \times R + 0.587 \times G + 0.114 \times B$$
+
+先将其放大256倍
+$$0.299 \times 256 = 76.544 \approx 77$$
+
+$$0.587 \times 256 = 150.272 \approx 150$$
+
+$$0.114 \times 256 = 29.184 \approx 29$$
+
+所以公式就变成了
+$$Y = \frac{R \times 77 + G \times 150 + B \times 29}{256}$$
+
+而除以256就直接以右移8位来执行
+
+这样处理就可以将浮点乘法和除法转为硬件友好的形式了
+
     module RGB_to_Gray(
         input  wire        clk,
         input  wire        rst_n,
@@ -87,6 +104,28 @@ FPGA代码综合、布线到上板通常需要十几分钟，而且查BUG也很�
         output  wire [7:0] data_o
     );
 ![RGB转灰度结果图](./Sim_result/RGB2Gray.png)
+
+#### 2.1.2 灰度转二值图
+将8位灰度视频数据转为1位二值数据
+
+module RGB_to_Binary(
+        input  wire         clk,
+        input  wire         rst_n,
+
+        input  wire [7:0]   threshold,
+
+        input  wire         vs_i,
+        input  wire         hs_i,
+        input  wire         de_i,
+        input  wire [7:0]   data_i, 
+
+        output  wire        vs_o,
+        output  wire        hs_o,
+        output  wire        de_o,
+        output  wire        data_o
+    );
+
+![RGB转灰度结果图](./Sim_result/RGB2Binary.png)
 ### 2.2 形态学处理
 
 ### 2.3 滤波器
